@@ -31,6 +31,14 @@ MEMGRAPH_USERNAME = os.environ.get("MEMGRAPH_USERNAME", "memgraph")
 MEMGRAPH_PASSWORD = os.environ.get("MEMGRAPH_PASSWORD", "mem0graph")
 
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+LLM_PROVIDER = os.environ.get("LLM_PROVIDER", "openai")
+LLM_API_KEY = os.environ.get("LLM_API_KEY", OPENAI_API_KEY)
+LLM_MODEL = os.environ.get("LLM_MODEL", "gpt-4.1-nano-2025-04-14")
+LLM_TEMPERATURE = os.environ.get("LLM_TEMPERATURE", "0.2")
+EMBEDDER_PROVIDER = os.environ.get("EMBEDDER_PROVIDER", "openai")
+EMBEDDER_API_KEY = os.environ.get("EMBEDDER_API_KEY", OPENAI_API_KEY)
+EMBEDDER_MODEL = os.environ.get("EMBEDDER_MODEL", "text-embedding-3-small")
+
 HISTORY_DB_PATH = os.environ.get("HISTORY_DB_PATH", "/app/history/history.db")
 
 DEFAULT_CONFIG = {
@@ -50,8 +58,8 @@ DEFAULT_CONFIG = {
         "provider": "neo4j",
         "config": {"url": NEO4J_URI, "username": NEO4J_USERNAME, "password": NEO4J_PASSWORD},
     },
-    "llm": {"provider": "openai", "config": {"api_key": OPENAI_API_KEY, "temperature": 0.2, "model": "gpt-4.1-nano-2025-04-14"}},
-    "embedder": {"provider": "openai", "config": {"api_key": OPENAI_API_KEY, "model": "text-embedding-3-small"}},
+    "llm": {"provider": LLM_PROVIDER, "config": {"api_key": LLM_API_KEY, "temperature": float(LLM_TEMPERATURE), "model": LLM_MODEL}},
+    "embedder": {"provider": EMBEDDER_PROVIDER, "config": {"api_key": EMBEDDER_API_KEY, "model": EMBEDDER_MODEL}},
     "history_db_path": HISTORY_DB_PATH,
 }
 
